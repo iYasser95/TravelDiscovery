@@ -15,6 +15,8 @@
 		182567F429FC121A006CB26C /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182567F329FC121A006CB26C /* Restaurant.swift */; };
 		182567F629FC1228006CB26C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182567F529FC1228006CB26C /* User.swift */; };
 		182567F829FC1234006CB26C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182567F729FC1234006CB26C /* Category.swift */; };
+		182567FB29FC17F8006CB26C /* TileModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182567FA29FC17F8006CB26C /* TileModifier.swift */; };
+		182567FD29FC1945006CB26C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182567FC29FC1945006CB26C /* Color+Extension.swift */; };
 		18A83CB229F7D0E30007274D /* TravelDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CB129F7D0E30007274D /* TravelDiscoveryApp.swift */; };
 		18A83CB429F7D0E30007274D /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CB329F7D0E30007274D /* DiscoverView.swift */; };
 		18A83CB629F7D0E50007274D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A83CB529F7D0E50007274D /* Assets.xcassets */; };
@@ -30,6 +32,8 @@
 		182567F329FC121A006CB26C /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		182567F529FC1228006CB26C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		182567F729FC1234006CB26C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		182567FA29FC17F8006CB26C /* TileModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileModifier.swift; sourceTree = "<group>"; };
+		182567FC29FC1945006CB26C /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		18A83CAE29F7D0E30007274D /* TravelDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A83CB129F7D0E30007274D /* TravelDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryApp.swift; sourceTree = "<group>"; };
 		18A83CB329F7D0E30007274D /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		182567F929FC17D7006CB26C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				182567FA29FC17F8006CB26C /* TileModifier.swift */,
+				182567FC29FC1945006CB26C /* Color+Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		18A83CA529F7D0E30007274D = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +103,7 @@
 		18A83CB029F7D0E30007274D /* TravelDiscovery */ = {
 			isa = PBXGroup;
 			children = (
+				182567F929FC17D7006CB26C /* Utils */,
 				182567F029FC11FE006CB26C /* Models */,
 				182567E729FC0F3C006CB26C /* Discover */,
 				18A83CB129F7D0E30007274D /* TravelDiscoveryApp.swift */,
@@ -178,11 +192,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				182567ED29FC116F006CB26C /* TrendingCreatorsView.swift in Sources */,
+				182567FB29FC17F8006CB26C /* TileModifier.swift in Sources */,
 				182567F829FC1234006CB26C /* Category.swift in Sources */,
 				182567F229FC120C006CB26C /* Destinations.swift in Sources */,
 				182567E929FC1087006CB26C /* PopularDesinationsView.swift in Sources */,
 				182567EB29FC1146006CB26C /* PopularRestaurantsView.swift in Sources */,
 				182567F429FC121A006CB26C /* Restaurant.swift in Sources */,
+				182567FD29FC1945006CB26C /* Color+Extension.swift in Sources */,
 				182567F629FC1228006CB26C /* User.swift in Sources */,
 				18A83CB429F7D0E30007274D /* DiscoverView.swift in Sources */,
 				18A83CB229F7D0E30007274D /* TravelDiscoveryApp.swift in Sources */,
