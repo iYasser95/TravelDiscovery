@@ -8,13 +8,43 @@
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+              }
     var body: some View {
         NavigationView {
-            ScrollView {
-                DiscoverCategoriesView()
-                PopularDesinationsView()
-                PopularRestaurantsView()
-                TrendingCreatorsView()
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.yellow.opacity(0.5), Color.orange]),
+                               startPoint: .top,
+                               endPoint: .center)
+                    .ignoresSafeArea()
+                Color(.init(white: 0.95, alpha: 1))
+                    .offset(y: 400)
+                ScrollView {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("Where do you want to go?")
+                        Spacer()
+                           
+                    } .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding()
+                        
+                        .background(Color(.init(white: 1, alpha: 0.3)))
+                        .cornerRadius(.infinity)
+                        .padding(16)
+                    
+                    DiscoverCategoriesView()
+                    
+                    VStack {
+                        PopularDesinationsView()
+                        PopularRestaurantsView()
+                        TrendingCreatorsView()
+                    }
+                    .background(Color(.init(white: 0.95, alpha: 1)))
+                    .cornerRadius(16)
+                    .padding(.top, 32)
+                }
             }
             .navigationTitle("Discovery")
         }
@@ -70,9 +100,9 @@ struct PopularDesinationsView: View {
                                 .padding(.bottom, 8)
                                 .foregroundColor(.gray)
                         }
-                            .background(Color(.init(white: 0.9, alpha: 1)))
+                            .background(Color.white)
                             .cornerRadius(5)
-                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+                            .shadow(color: .init(.sRGB, white: 0.75, opacity: 1), radius: 4, x: 0.0, y: 2)
                             .padding(.bottom)
                     }
                 }
@@ -137,9 +167,9 @@ struct PopularRestaurantsView: View {
                             Spacer()
                         }
                         .frame(width: 240, height: 64)
-                        .background(Color(.init(white: 0.9, alpha: 1)))
+                        .background(Color.white)
                         .cornerRadius(5)
-                        .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+                        .shadow(color: .init(.sRGB, white: 0.75, opacity: 1), radius: 4, x: 0.0, y: 2)
                         .padding(.bottom)
                     }
                 }
@@ -216,13 +246,13 @@ struct DiscoverCategoriesView: View {
                         Image(systemName: category.imageName)
                             .font(.system(size: 20))
                             .frame(width: 64, height: 64)
-                            .foregroundColor(.white)
-                            .background(Color.gray)
+                            .foregroundColor(Color.orange)
+                            .background(Color.white)
                             .cornerRadius(.infinity)
-                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
                         Text(category.name)
                             .font(.system(size: 12, weight: .semibold))
                             .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
                     }.frame(width: 68)
                 }
             }
