@@ -1,5 +1,5 @@
 //
-//  PopularDesinationsView.swift
+//  PopularDestinationsView.swift
 //  TravelDiscovery
 //
 //  Created by Apple on 28/04/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PopularDesinationsView: View {
+struct PopularDestinationsView: View {
     
     let destinations: [Destinations] = [
         Destinations(name: "Paris", country: "France", imageName: "france"),
@@ -59,6 +59,6 @@ struct PopularDesinationsView: View {
 
 struct PopularDesinationsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularDesinationsView()
+        PopularDestinationsView()
     }
 }

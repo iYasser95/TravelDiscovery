@@ -37,7 +37,7 @@ struct DiscoverView: View {
                     DiscoverCategoriesView()
                     
                     VStack {
-                        PopularDesinationsView()
+                        PopularDestinationsView()
                         PopularRestaurantsView()
                         TrendingCreatorsView()
                     }
