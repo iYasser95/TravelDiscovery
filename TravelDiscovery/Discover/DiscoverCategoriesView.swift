@@ -43,15 +43,28 @@ struct DiscoverCategoriesView: View {
     }
 }
 
+struct Place: Decodable, Hashable {
+    let id, name, thumbnail: String
+}
+
 class CategoryDetailsViewModel: ObservableObject {
     @Published var isLoading = true
-    @Published var places = [Int]()
+    @Published var places = [Place]()
+    @Published var errorMessage = ""
     
     init() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+        let stringURL = "https://travel.letsbuildthatapp.com/travel_discovery/category?name=art"
+        guard let url = URL(string: stringURL) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            do {
+                self.places = try JSONDecoder().decode([Place].self, from: data)
+            } catch {
+                print("Failed to decode JSON: \(error.localizedDescription)")
+                self.errorMessage = error.localizedDescription
+            }
             self.isLoading = false
-            self.places = [0, 1, 2]
-        })
+        }.resume()
     }
 }
 
@@ -63,18 +76,21 @@ struct CategoryDetailsView: View {
             if viewModel.isLoading {
                 ActivityIndicatorView()
             } else {
-                ScrollView {
-                    ForEach(viewModel.places, id: \.self) { num in
-                        VStack(alignment: .leading, spacing: 0) {
-                            Image("art1")
-                                .resizable()
-                                .scaledToFill()
-                            Text("Demo")
-                                .font(.system(size: 12, weight: .semibold))
-                                .padding()
+                ZStack {
+                    Text(viewModel.errorMessage)
+                    ScrollView {
+                        ForEach(viewModel.places, id: \.self) { place in
+                            VStack(alignment: .leading, spacing: 0) {
+                                Image("art1")
+                                    .resizable()
+                                    .scaledToFill()
+                                Text(place.name)
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .padding()
+                            }
+                            .tileModifier()
+                            .padding()
                         }
-                        .tileModifier()
-                        .padding()
                     }
                 }
             }
