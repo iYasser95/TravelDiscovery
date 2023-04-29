@@ -6,6 +6,12 @@
 //
 
 import Foundation
+import Kingfisher
 struct Place: Decodable, Hashable {
     let name, thumbnail: String
+
+     var image: KFImage {
+        guard let url = URL(string: thumbnail) else { return KFImage(source: .none) }
+        return KFImage(url)
+    }
 }

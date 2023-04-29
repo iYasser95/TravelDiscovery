@@ -8,18 +8,25 @@
 import SwiftUI
 
 struct CategoryDetailsView: View {
-    @ObservedObject private var viewModel = CategoryDetailsViewModel()
+    init(name: String) {
+        self.name = name
+        self.viewModel = CategoryDetailsViewModel(name: name)
+    }
+    private let name: String
+    @ObservedObject private var viewModel: CategoryDetailsViewModel
     var body: some View {
         ZStack {
             if viewModel.isLoading {
                 ActivityIndicatorView()
             } else {
                 ZStack {
-                    Text(viewModel.errorMessage)
+                    if  viewModel.error != nil {
+                        ErrorView(action: viewModel.fetchCategoryDetails)
+                    }
                     ScrollView {
                         ForEach(viewModel.places, id: \.self) { place in
                             VStack(alignment: .leading, spacing: 0) {
-                                Image("art1")
+                                place.image
                                     .resizable()
                                     .scaledToFill()
                                 Text(place.name)
@@ -33,12 +40,14 @@ struct CategoryDetailsView: View {
                 }
             }
         }
-        .navigationBarTitle("Category", displayMode: .inline)
+        .navigationBarTitle(name, displayMode: .inline)
     }
 }
 
 struct CategoryDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryDetailsView()
+        NavigationView {
+            CategoryDetailsView(name: "Category Name")
+        }
     }
 }

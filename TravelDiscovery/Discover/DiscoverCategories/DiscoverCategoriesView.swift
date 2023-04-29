@@ -10,7 +10,7 @@ import SwiftUI
 struct DiscoverCategoriesView: View {
     let categories: [Category] = [
         Category(name: "Art", imageName: "paintpalette.fill"),
-        Category(name: "Sport", imageName: "sportscourt.fill"),
+        Category(name: "Sports", imageName: "sportscourt.fill"),
         Category(name: "Live Events", imageName: "music.mic"),
         Category(name: "Food", imageName: "cart.fill"),
         Category(name: "History", imageName: "chart.bar.fill")
@@ -20,7 +20,7 @@ struct DiscoverCategoriesView: View {
             HStack(alignment: .top, spacing: 14) {
                 ForEach(categories, id: \.self) { category in
                     NavigationLink {
-                        CategoryDetailsView()
+                        CategoryDetailsView(name: category.name)
                     } label: {
                         VStack(spacing: 8) {
                             Image(systemName: category.imageName)
@@ -45,13 +45,9 @@ struct DiscoverCategoriesView: View {
 
 struct DiscoverCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            CategoryDetailsView()
+        ZStack {
+            Color.orange
+            DiscoverCategoriesView()
         }
-        DiscoverView()
-//        ZStack {
-//            Color.orange
-//            DiscoverCategoriesView()
-//        }
     }
 }
