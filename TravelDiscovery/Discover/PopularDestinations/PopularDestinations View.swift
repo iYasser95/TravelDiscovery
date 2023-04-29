@@ -9,11 +9,7 @@ import SwiftUI
 
 struct PopularDestinationsView: View {
     
-    let destinations: [Destinations] = [
-        Destinations(name: "Paris", country: "France", imageName: "france"),
-        Destinations(name: "Tokyo", country: "Japan", imageName: "japan"),
-        Destinations(name: "New York", country: "US", imageName: "new_york"),
-    ]
+    let destinations: [Destinations] = Destinations.all
     var body: some View {
         VStack {
             HStack {
