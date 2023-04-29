@@ -43,20 +43,40 @@ struct DiscoverCategoriesView: View {
     }
 }
 
+class CategoryDetailsViewModel: ObservableObject {
+    @Published var isLoading = true
+    @Published var places = [Int]()
+    
+    init() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+            self.isLoading = false
+            self.places = [0, 1, 2]
+        })
+    }
+}
+
 struct CategoryDetailsView: View {
+    @ObservedObject private var viewModel = CategoryDetailsViewModel()
+    
     var body: some View {
-        ScrollView {
-            ForEach(0..<5, id: \.self) { num in
-                VStack(alignment: .leading, spacing: 0) {
-                    Image("art1")
-                        .resizable()
-                        .scaledToFill()
-                    Text("Demo")
-                        .font(.system(size: 12, weight: .semibold))
+        ZStack {
+            if viewModel.isLoading {
+                ActivityIndicatorView()
+            } else {
+                ScrollView {
+                    ForEach(viewModel.places, id: \.self) { num in
+                        VStack(alignment: .leading, spacing: 0) {
+                            Image("art1")
+                                .resizable()
+                                .scaledToFill()
+                            Text("Demo")
+                                .font(.system(size: 12, weight: .semibold))
+                                .padding()
+                        }
+                        .tileModifier()
                         .padding()
+                    }
                 }
-                .tileModifier()
-                .padding()
             }
         }
         .navigationBarTitle("Category", displayMode: .inline)
