@@ -29,25 +29,12 @@ struct PopularDestinationsView: View {
             ScrollView(.horizontal) {
                 HStack(spacing: 8) {
                     ForEach(destinations, id: \.self) { destination in
-                        VStack(alignment: .leading, spacing: 0) {
-                            Image(destination.imageName)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(5)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 6)
-                            Text(destination.name)
-                                .font(.system(size: 12, weight: .semibold))
-                                .padding(.horizontal, 12)
-                            Text(destination.country)
-                                .font(.system(size: 12, weight: .semibold))
-                                .padding(.horizontal, 12)
-                                .padding(.bottom, 8)
-                                .foregroundColor(.gray)
+                        NavigationLink {
+                            PopularDestinationDetailsView(destination: destination)
+                        } label: {
+                            PopularDestinationTile(destination: destination)
+                            .padding(.bottom)
                         }
-                        .tileModifier()
-                        .padding(.bottom)
                     }
                 }
                 .padding(.horizontal)
@@ -56,9 +43,9 @@ struct PopularDestinationsView: View {
     }
 }
 
-
 struct PopularDesinationsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularDestinationsView()
+        DiscoverView()
+//        PopularDestinationsView()
     }
 }
