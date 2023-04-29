@@ -26,6 +26,7 @@
 		185E7B6229FC4F9000F4892C /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E7B6129FC4F9000F4892C /* ActivityIndicatorView.swift */; };
 		1883D16129FD541D00C97FCC /* PopularDestinationTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883D16029FD541D00C97FCC /* PopularDestinationTile.swift */; };
 		1883D16329FD551400C97FCC /* PopularDestinationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883D16229FD551400C97FCC /* PopularDestinationDetailsView.swift */; };
+		1883D16529FD876B00C97FCC /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883D16429FD876B00C97FCC /* Attraction.swift */; };
 		18A83CB229F7D0E30007274D /* TravelDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CB129F7D0E30007274D /* TravelDiscoveryApp.swift */; };
 		18A83CB429F7D0E30007274D /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A83CB329F7D0E30007274D /* DiscoverView.swift */; };
 		18A83CB629F7D0E50007274D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18A83CB529F7D0E50007274D /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		185E7B6129FC4F9000F4892C /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		1883D16029FD541D00C97FCC /* PopularDestinationTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDestinationTile.swift; sourceTree = "<group>"; };
 		1883D16229FD551400C97FCC /* PopularDestinationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularDestinationDetailsView.swift; sourceTree = "<group>"; };
+		1883D16429FD876B00C97FCC /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
 		18A83CAE29F7D0E30007274D /* TravelDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A83CB129F7D0E30007274D /* TravelDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryApp.swift; sourceTree = "<group>"; };
 		18A83CB329F7D0E30007274D /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				182567F529FC1228006CB26C /* User.swift */,
 				182567F729FC1234006CB26C /* Category.swift */,
 				184928C229FD0E6B00176254 /* Place.swift */,
+				1883D16429FD876B00C97FCC /* Attraction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				184928C629FD0E9500176254 /* CategoryDetailsViewModel.swift in Sources */,
 				184928C329FD0E6B00176254 /* Place.swift in Sources */,
 				182567EB29FC1146006CB26C /* PopularRestaurantsView.swift in Sources */,
+				1883D16529FD876B00C97FCC /* Attraction.swift in Sources */,
 				182567F429FC121A006CB26C /* Restaurant.swift in Sources */,
 				182567FD29FC1945006CB26C /* Color+Extension.swift in Sources */,
 				1883D16129FD541D00C97FCC /* PopularDestinationTile.swift in Sources */,
