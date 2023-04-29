@@ -10,6 +10,18 @@ import SwiftUI
 struct ErrorView: View {
     
     var action: (() -> Void)?
+    @State private var reloadCount = 3
+    private var isEnabled: Bool {
+        reloadCount > 0
+    }
+    private var errorTitle: String {
+        reloadCount == 0 ? "Too many requests" : "Something went wrong"
+    }
+    
+    private var errorMessage: String {
+        reloadCount == 0 ? "Please try later again" :
+                           "Details could not be loaded, please try again"
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,13 +29,14 @@ struct ErrorView: View {
                 .font(.system(size: 64, weight: .semibold))
                 .foregroundColor(.red)
             Group {
-                Text("Something went wrong")
+                Text(errorTitle)
                     .font(.system(size: 16, weight: .bold))
-                Text("Details could not be loaded, please try again")
+                Text(errorMessage)
                     .font(.system(size: 16))
             }
             Button() {
                 if let action = action {
+                    self.reloadCount -= 1
                     action()
                 }
             } label: {
@@ -33,6 +46,7 @@ struct ErrorView: View {
                     .background(Color.red)
                     .foregroundColor(.white)
                     .cornerRadius(.infinity)
+                    .opacity(isEnabled ? 1 : 0)
             }
             .padding(.top)
         }

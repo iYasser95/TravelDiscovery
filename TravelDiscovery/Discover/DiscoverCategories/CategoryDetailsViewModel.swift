@@ -26,23 +26,27 @@ class CategoryDetailsViewModel: ObservableObject {
         isLoading = true
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
-                self.isLoading = false
-                self.error = NSError(domain: "", code: statusCode)
+                DispatchQueue.main.async {
+                    self.isLoading = false
+                    self.error = NSError(domain: "", code: statusCode)
+                }
                 return
             }
             
-            guard let data = data, error == nil else {
+            DispatchQueue.main.async {
+                guard let data = data, error == nil else {
+                    self.isLoading = false
+                    self.error = error
+                    return
+                }
+                do {
+                    self.places = try JSONDecoder().decode([Place].self, from: data)
+                } catch {
+                    print("Failed to decode JSON: \(error.localizedDescription)")
+                    self.error = error
+                }
                 self.isLoading = false
-                self.error = error
-                return
             }
-            do {
-                self.places = try JSONDecoder().decode([Place].self, from: data)
-            } catch {
-                print("Failed to decode JSON: \(error.localizedDescription)")
-                self.error = error
-            }
-            self.isLoading = false
         }.resume()
     }
 }
