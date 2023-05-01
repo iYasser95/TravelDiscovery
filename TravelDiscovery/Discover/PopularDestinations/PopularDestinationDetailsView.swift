@@ -12,7 +12,9 @@ struct PopularDestinationDetailsView: View {
     let destination: Destinations
     @State var region: MKCoordinateRegion
     @State var isShowingAttractions = false
-    let attractions: [Attraction] = Attraction.all
+    var attractions: [Attraction]  {
+        isShowingAttractions ? Attraction.all : Attraction.none
+    }
     init(destination: Destinations) {
         self.destination = destination
         self.region = MKCoordinateRegion(center: .init(latitude: destination.latitude,
@@ -25,8 +27,6 @@ struct PopularDestinationDetailsView: View {
             Image(destination.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(height: 150)
-                .clipped()
             VStack(alignment: .leading) {
                 
                 Text(destination.name)
@@ -64,7 +64,7 @@ struct PopularDestinationDetailsView: View {
             .padding(.horizontal)
   
             Map(coordinateRegion: $region,
-                annotationItems: isShowingAttractions ? attractions : []) { attraction in
+                annotationItems: attractions) { attraction in
                 MapMarker(coordinate: attraction.coordinates, tint: .orange)
             }
                 .frame(height: 300)

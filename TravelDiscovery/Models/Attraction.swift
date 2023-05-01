@@ -20,4 +20,5 @@ struct Attraction: Identifiable {
     static let all: [Attraction] = [Attraction(name: "Eiffel Tower", latitude: 48.858605, longitude: 2.2946),
                                     Attraction(name: "Champs-Elysees", latitude: 48.866867, longitude: 2.311780),
                                     Attraction(name: "Louvre Museum", latitude: 48.860288, longitude: 2.337789)]
+    static let none: [Attraction] = []
 }
