@@ -12,8 +12,9 @@ class CategoryDetailsViewModel: ObservableObject {
     @Published var error: Error?
     private var name: String = ""
     private var url: URL? {
-        let stringURL = "https://travel.letsbuildthatapp.com/travel_discovery/category?name=\(name.lowercased().removeWhiteSpaces)"
-        return URL(string: stringURL)
+        let stringURL = "https://travel.letsbuildthatapp.com/travel_discovery/category?name=\(name.lowercased())"
+        guard let fixedString = stringURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
+        return URL(string: fixedString)
     }
     
     init(name: String) {
@@ -22,7 +23,11 @@ class CategoryDetailsViewModel: ObservableObject {
     }
     
     func fetchCategoryDetails() {
-        guard let url = url else { return }
+        guard let url = url else {
+            self.isLoading = false
+            self.error = NSError(domain: "", code: 404)
+            return
+        }
         isLoading = true
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 400 {

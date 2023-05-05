@@ -15,3 +15,9 @@ struct Destinations: Hashable {
                                       Destinations(name: "Tokyo", country: "Japan", imageName: "japan", latitude: 35.679693, longitude: 139.771913),
                                       Destinations(name: "New York", country: "US", imageName: "new_york", latitude: 40.71592, longitude: -74.0055)]
 }
+
+struct DestinationDetailsModel: Codable {
+    let name, country, description: String
+    let photos: [String]
+    
+}

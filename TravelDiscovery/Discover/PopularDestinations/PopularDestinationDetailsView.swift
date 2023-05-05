@@ -10,6 +10,7 @@ import MapKit
 
 struct PopularDestinationDetailsView: View {
     let destination: Destinations
+    @ObservedObject var viewModel = DestinationDetailsViewModel(name: "")
     @State var region: MKCoordinateRegion
     @State var isShowingAttractions = false
     var attractions: [Attraction]  {
@@ -21,53 +22,63 @@ struct PopularDestinationDetailsView: View {
                                                        longitude: destination.longitude),
                                          span: .init(latitudeDelta: 0.1,
                                                      longitudeDelta: 0.1))
+        self.viewModel = DestinationDetailsViewModel(name: destination.name)
     }
+    
     var body: some View {
-        ScrollView {
-            Image(destination.imageName)
-                .resizable()
-                .scaledToFill()
-            VStack(alignment: .leading) {
-                
-                Text(destination.name)
-                    .font(.system(size: 18, weight: .bold))
-                Text(destination.country)
-                
-                HStack {
-                    ForEach(0..<5, id: \.self) { num in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.orange)
+        ZStack {
+            if viewModel.isLoading {
+                ActivityIndicatorView()
+            } else {
+                if viewModel.error != nil {
+                    ErrorView()
+                } else {
+                    ScrollView {
+                        DestinationHeaderContainer(imageNames: viewModel.destinationDetails?.photos ?? [])
+                            .frame(height: 250)
+                        VStack(alignment: .leading) {
+                            Text(destination.name)
+                                .font(.system(size: 18, weight: .bold))
+                            Text(destination.country)
+                            
+                            HStack {
+                                ForEach(0..<5, id: \.self) { num in
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(.orange)
+                                }
+                            }
+                            .padding(.top, 2)
+                            
+                            Text(viewModel.destinationDetails?.description ?? "")
+                                .padding(.top, 8)
+                                .font(.system(size: 16))
+                            
+                            HStack { Spacer() }
+                        }
+                        .padding(.horizontal)
+                        HStack {
+                            Text("Location")
+                                .font(.system(size: 18, weight: .semibold))
+                            Spacer()
+                            Button {
+                                isShowingAttractions.toggle()
+                            } label: {
+                                Text("\(isShowingAttractions ? "Hide" : "Show") Attractions")
+                                    .font(.system(size: 14, weight: .semibold))
+                            }
+                            Toggle("", isOn: $isShowingAttractions)
+                                .labelsHidden()
+                        }
+                        .padding(.horizontal)
+              
+                        Map(coordinateRegion: $region,
+                            annotationItems: attractions) { attraction in
+                            MapMarker(coordinate: attraction.coordinates, tint: .orange)
+                        }
+                            .frame(height: 300)
                     }
                 }
-                .padding(.top, 2)
-                
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged")
-                    .padding(.top, 8)
-                    .font(.system(size: 16))
-                
-                HStack { Spacer() }
             }
-            .padding(.horizontal)
-            HStack {
-                Text("Location")
-                    .font(.system(size: 18, weight: .semibold))
-                Spacer()
-                Button {
-                    isShowingAttractions.toggle()
-                } label: {
-                    Text("\(isShowingAttractions ? "Hide" : "Show") Attractions")
-                        .font(.system(size: 14, weight: .semibold))
-                }
-                Toggle("", isOn: $isShowingAttractions)
-                    .labelsHidden()
-            }
-            .padding(.horizontal)
-  
-            Map(coordinateRegion: $region,
-                annotationItems: attractions) { attraction in
-                MapMarker(coordinate: attraction.coordinates, tint: .orange)
-            }
-                .frame(height: 300)
         }
         .navigationBarTitle(destination.name, displayMode: .inline)
     }

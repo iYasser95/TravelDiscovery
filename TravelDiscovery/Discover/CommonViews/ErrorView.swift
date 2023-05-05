@@ -19,7 +19,9 @@ struct ErrorView: View {
     }
     
     private var errorMessage: String {
-        reloadCount == 0 ? "Please try later again" :
+        // If there's no action then the user doesn't have the option to reload.
+        if action == nil { return "" }
+        return reloadCount == 0 ? "Please try later again" :
                            "Details could not be loaded, please try again"
     }
     
@@ -34,21 +36,22 @@ struct ErrorView: View {
                 Text(errorMessage)
                     .font(.system(size: 16))
             }
-            Button() {
-                if let action = action {
+            if let action = action {
+                // Show the button only if there's an action for the user to reload the page.
+                Button() {
                     self.reloadCount -= 1
                     action()
+                } label: {
+                    Text("Please try again")
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(width: 200, height: 50)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(.infinity)
+                        .opacity(isEnabled ? 1 : 0)
                 }
-            } label: {
-                Text("Please try again")
-                    .font(.system(size: 16, weight: .bold))
-                    .frame(width: 200, height: 50)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(.infinity)
-                    .opacity(isEnabled ? 1 : 0)
+                .padding(.top)
             }
-            .padding(.top)
         }
     }
 }
